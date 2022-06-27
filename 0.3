@@ -1,0 +1,24 @@
+0.3 - Grouping and Aggregating Rows
+
+How many medals did Norway win in each of the Winter Olympics since the year 2000? Select the year and number of medals.
+SELECT year, COUNT(*) as medal_count
+FROM winter_olympics
+WHERE team = 'Norway' AND year >= 2000
+GROUP BY year
+
+Select the year and the total number of unique events in every Winter Olympics since it began. Sort the results bu number of unique events in descending order .
+SELECT year, COUNT(DISTINCT(event)) as unique_events
+FROM winter_olympics
+GROUP BY year
+ORDER BY unique_events desc;
+
+Time to see which countries dominated in particular Olympic tournaments. Find the team, city,year`, and total number of unique events each country won gold medals in.
+
+Sort the results by number of gold medals in descending order and take only the first 20 rows.
+SELECT team, city, year,
+    COUNT(DISTINCT(event)) as unique_events
+FROM winter_olympics
+WHERE medal = 'Gold'
+GROUP BY team,year
+ORDER BY unique_events desc
+LIMIT 20;
